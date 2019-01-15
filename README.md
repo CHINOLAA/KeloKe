@@ -1,7 +1,8 @@
-# KeloKe - Travel Group App
+# KeloKe - Group Experience App
 
 ## About
-This project is an app for the group structure of groups of people that displays travel options from a user library, with the option to order by option.
+ Get in touch with people looking for the same common interests ect, Basketball, Baseball, Football. The basic idea is simple:
+ when people get together they give the best of themselves. It brings together people with similar interests to explore and learn together.
 
 ## Features
 - Use of ArrayList to retrieve and display information to a Listview.
