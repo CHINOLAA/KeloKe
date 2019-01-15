@@ -1,19 +1,17 @@
 # KeloKe - Travel Group App
 
-Used **API 27: Android 8.1 (Oreo)**
-
 ## About
-This project is a music player structure app that displays music options from a user library, with ability to sort by genre and artist.
+This project is an app for the group structure of groups of people that displays travel options from a user library, with the option to order by option.
 
 ## Features
 - Use of ArrayList to retrieve and display information to a Listview.
 - Use of OnClickListeners and explicit intents to link between activities within the app.
 
-## Licenza
-Copyright 2016 Android Open Source Project, Inc.
+License
+Copyright 2016 The Android Open Source Project, Inc.
 
-Autorizzato ad Apache Software Foundation (ASF) con uno o più contratti di licenza contributor. Vedere il file AVVISO distribuito con questo lavoro per ulteriori informazioni sulla proprietà del copyright. L'ASF le rilascia questo file sotto la licenza Apache, versione 2.0 (la "Licenza"); non è possibile utilizzare questo file se non in conformità con la licenza. È possibile ottenere una copia della licenza all'indirizzo
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
-Salvo quanto richiesto dalla legge applicabile o concordato per iscritto, il software distribuito sotto la Licenza è distribuito "COSÌ COM'È", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO, espresse o implicite. Vedere la Licenza per le autorizzazioni e limitazioni specifiche della lingua che disciplinano la Licenza.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
