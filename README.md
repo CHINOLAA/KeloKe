@@ -7,7 +7,7 @@ This project is an app for the group structure of groups of people that displays
 - Use of ArrayList to retrieve and display information to a Listview.
 - Use of OnClickListeners and explicit intents to link between activities within the app.
 
-License
+## License
 Copyright 2016 The Android Open Source Project, Inc.
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
