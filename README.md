@@ -9,7 +9,7 @@ This project is a music player structure app that displays music options from a 
 - Use of ArrayList to retrieve and display information to a Listview.
 - Use of OnClickListeners and explicit intents to link between activities within the app.
 
-Licenza
+## Licenza
 Copyright 2016 Android Open Source Project, Inc.
 
 Autorizzato ad Apache Software Foundation (ASF) con uno o più contratti di licenza contributor. Vedere il file AVVISO distribuito con questo lavoro per ulteriori informazioni sulla proprietà del copyright. L'ASF le rilascia questo file sotto la licenza Apache, versione 2.0 (la "Licenza"); non è possibile utilizzare questo file se non in conformità con la licenza. È possibile ottenere una copia della licenza all'indirizzo
