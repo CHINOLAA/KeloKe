@@ -9,7 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -67,6 +70,37 @@ public class ArtistActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+
+        //Set intent for Artists button
+        ImageView artistsLayout = findViewById(R.id.artists);
+        artistsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ArtistActivity.this, ArtistActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Set intent for Songs button
+        ImageView songsLayout = findViewById(R.id.songs);
+        songsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ArtistActivity.this, SongActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Set intent for Shuffle button
+        ImageView shuffleLayout = findViewById(R.id.shuffle);
+        shuffleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ArtistActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Create new ArrayList and add all artists
         final ArrayList<String> artists = new ArrayList<>();
         artists.add("alt-J");
@@ -77,7 +111,7 @@ public class ArtistActivity extends AppCompatActivity {
         //Create new adapter with artists ArrayList
         //Get ListView from XML and set adapter to list all artists
         ArtistAdapter adapter = new ArtistAdapter(this, artists);
-        ListView listView = findViewById(R.id.list);
+        GridView listView = findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         //Set click listener on ListView for each item in the list

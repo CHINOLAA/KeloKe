@@ -85,23 +85,6 @@ public class PlayActivity extends AppCompatActivity {
         ImageView albumImageView = findViewById(R.id.album_art);
         albumImageView.setImageResource(resID);
 
-        //Set play button to switch between play and pause
-        final ImageView playImageView = findViewById(R.id.play_button);
-        playImageView.setOnClickListener(new View.OnClickListener() {
-            boolean isPlaying = true;
-
-            @Override
-            public void onClick(View view) {
-                if (isPlaying) {
-                    playImageView.setImageResource(R.drawable.pause_button);
-                    isPlaying = false;
-                } else {
-                    playImageView.setImageResource(R.drawable.play_button);
-                    isPlaying = true;
-                }
-            }
-        });
-
         //Set next button to start new Shuffle activity and pass in current artist
         final ImageView nextImageView = findViewById(R.id.next_button);
         nextImageView.setOnClickListener(new View.OnClickListener() {

@@ -71,6 +71,16 @@ public class ShuffleActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        //Set intent for Shuffle button
+        ImageView shuffleLayout = findViewById(R.id.play_button);
+        shuffleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShuffleActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Get info passed from previous activity to play correct artist
         Intent intent = getIntent();
         String artist = intent.getStringExtra("ARTIST");
@@ -122,22 +132,6 @@ public class ShuffleActivity extends AppCompatActivity {
         final int playingID = randomSong.getAlbumArt();
         albumImageView.setImageResource(playingID);
 
-        //Set play button to switch between play and pause
-        final ImageView playImageView = findViewById(R.id.play_button);
-        playImageView.setOnClickListener(new View.OnClickListener() {
-            boolean isPlaying = true;
-
-            @Override
-            public void onClick(View view) {
-                if (isPlaying) {
-                    playImageView.setImageResource(R.drawable.pause_button);
-                    isPlaying = false;
-                } else {
-                    playImageView.setImageResource(R.drawable.play_button);
-                    isPlaying = true;
-                }
-            }
-        });
 
         //Set next button to start new activity and pass in current artist
         if (artist != null) {
@@ -145,7 +139,7 @@ public class ShuffleActivity extends AppCompatActivity {
             nextImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent playIntent = new Intent(ShuffleActivity.this, PlayActivity.class);
+                    Intent playIntent = new Intent(ShuffleActivity.this, ShuffleActivity.class);
                     playIntent.putExtra("ARTIST", playingArtist);
                     playIntent.putExtra("TITLE", playingTitle);
                     playIntent.putExtra("ID", Integer.toString(playingID));

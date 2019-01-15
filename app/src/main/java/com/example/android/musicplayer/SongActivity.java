@@ -9,7 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -66,6 +69,36 @@ public class SongActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        //Set intent for Artists button
+        ImageView artistsLayout = findViewById(R.id.artists);
+        artistsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SongActivity.this, ArtistActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Set intent for Songs button
+        ImageView songsLayout = findViewById(R.id.songs);
+        songsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SongActivity.this, SongActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Set intent for Shuffle button
+        ImageView shuffleLayout = findViewById(R.id.shuffle);
+        shuffleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SongActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Get info passed from previous activity to play correct category to filter
         Intent intent = getIntent();
         final String category = intent.getStringExtra("CATEGORY");
@@ -113,7 +146,7 @@ public class SongActivity extends AppCompatActivity {
         }
 
         //Get ListView and set adapter to display songs
-        ListView listView = findViewById(R.id.list);
+        GridView listView = findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         //Set click listener according to category if necessary
@@ -123,7 +156,7 @@ public class SongActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (category == null) {
                     Song nowPlaying = songs.get(position);
-                    Intent intent = new Intent(SongActivity.this, PlayActivity.class);
+                    Intent intent = new Intent(SongActivity.this, ShuffleActivity.class);
                     intent.putExtra("ARTIST", nowPlaying.getArtist());
                     intent.putExtra("TITLE", nowPlaying.getTitle());
                     int resID = nowPlaying.getAlbumArt();
@@ -131,7 +164,7 @@ public class SongActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (category.equals("artist")) {
                     Song nowPlaying = artistSongs.get(position);
-                    Intent intent = new Intent(SongActivity.this, PlayActivity.class);
+                    Intent intent = new Intent(SongActivity.this, ShuffleActivity.class);
                     intent.putExtra("ARTIST", nowPlaying.getArtist());
                     intent.putExtra("TITLE", nowPlaying.getTitle());
                     int resID = nowPlaying.getAlbumArt();
@@ -139,7 +172,7 @@ public class SongActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (category.equals("genre")) {
                     Song nowPlaying = genreSongs.get(position);
-                    Intent intent = new Intent(SongActivity.this, PlayActivity.class);
+                    Intent intent = new Intent(SongActivity.this, ShuffleActivity.class);
                     intent.putExtra("ARTIST", nowPlaying.getArtist());
                     intent.putExtra("TITLE", nowPlaying.getTitle());
                     int resID = nowPlaying.getAlbumArt();

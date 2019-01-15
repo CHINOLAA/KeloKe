@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".MainActivity">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorPrimaryDark"
+android:paddingBottom="3dp"
+tools:context=".MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        app:popupTheme="@style/AppTheme"
-        style="@style/Toolbar" />
+<android.support.v7.widget.Toolbar
+    android:id="@+id/my_toolbar"
+    app:popupTheme="@style/AppTheme"
+    style="@style/Toolbar" />
 
-    <!--Image Credit: https://pixabay.com/en/music-note-music-note-musical-notes-1967480/ -->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/music_note_trans_small_dark" />
-
-    <TextView
-        android:id="@+id/app_name"
-        style="@style/AppName"
-        android:layout_below="@id/my_toolbar"
-        android:layout_centerHorizontal="true" />
-
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridView
         android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/app_name"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
         android:divider="@android:color/black"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:numColumns="auto_fit" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/artists"
+        style="@style/TextView"
+        android:src="@drawable/base_iskierdas"
+        android:layout_weight="1"
+        android:text="@string/artist" />
+
+    <ImageView
+        android:id="@+id/shuffle"
+        android:src="@drawable/baseline"
+        style="@style/TextView"
+        android:layout_weight="1"
+        android:text="@string/shuffle" />
+
+    <ImageView
+        android:id="@+id/songs"
+        android:src="@drawable/base_iskierda"
+        style="@style/TextView"
+        android:layout_weight="1"
+        android:text="@string/all_songs" />
+</LinearLayout>
+
 </RelativeLayout>

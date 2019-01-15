@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class GenreActivity extends AppCompatActivity {
         //Create new adapter with genres ArrayList
         //Get ListView from XML and set adapter to list all genres
         GenreAdapter adapter = new GenreAdapter(this, genres);
-        ListView listView = findViewById(R.id.list);
+        GridView listView = findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         //Set click listener on ListView for each item in the list

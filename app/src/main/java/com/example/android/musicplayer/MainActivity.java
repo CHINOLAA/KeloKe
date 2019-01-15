@@ -8,7 +8,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,25 +64,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
 
         //Set my_toolbar as Action Bar with title as Home
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        setTitle("Home");
+        setTitle("Playlist");
 
-        //Set intent for Genres button
-        RelativeLayout genresLayout = findViewById(R.id.genres);
-        genresLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, GenreActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //Set intent for Artists button
-        RelativeLayout artistsLayout = findViewById(R.id.artists);
+        ImageView artistsLayout = findViewById(R.id.artists);
         artistsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Set intent for Songs button
-        RelativeLayout songsLayout = findViewById(R.id.songs);
+        ImageView songsLayout = findViewById(R.id.songs);
         songsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,12 +93,95 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Set intent for Shuffle button
-        RelativeLayout shuffleLayout = findViewById(R.id.shuffle);
+        ImageView shuffleLayout = findViewById(R.id.shuffle);
         shuffleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ShuffleActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //Get info passed from previous activity to play correct category to filter
+        Intent intent = getIntent();
+        final String category = intent.getStringExtra("CATEGORY");
+        final String specific = intent.getStringExtra("SPECIFIC");
+
+        //Create new ArrayList and add all Song objects
+        final ArrayList<Song> songs = new ArrayList<>();
+        songs.add(new Song("Left Hand Free", "alt-J", "Indie/Alternative Rock", R.drawable.altj_this_is_all_yours));
+        songs.add(new Song("bodyache", "Purity Ring", "Electronic/Pop", R.drawable.purity_ring_another_eternity));
+        songs.add(new Song("Cleopatra", "Lumineers", "Indie/Alternative Rock", R.drawable.lumineers_cleopatra));
+        songs.add(new Song("Miracle", "CHVRCHES", "Electronic/Pop", R.drawable.chvrches_miracle));
+        songs.add(new Song("In Cold Blood", "alt-J", "Indie/Alternative Rock", R.drawable.altj_relaxer));
+        songs.add(new Song("Sleep on the Floor", "Lumineers", "Indie/Alternative Rock", R.drawable.lumineers_cleopatra));
+        songs.add(new Song("Fitzpleasure", "alt-J", "Indie/Alternative Rock", R.drawable.altj_an_awesome_wave));
+        songs.add(new Song("Never Ending Circles", "CHVRCHES", "Electronic/Pop", R.drawable.chvrches_every_open_eye));
+        songs.add(new Song("begin again", "Purity Ring", "Electronic/Pop", R.drawable.purity_ring_another_eternity));
+        songs.add(new Song("Asido", "Purity Ring", "Electronic/Pop", R.drawable.purityring_asido));
+        songs.add(new Song("Stubborn Love", "Lumineers", "Indie/Alternative Rock", R.drawable.lumineers_album));
+        songs.add(new Song("Tether", "CHVRCHES", "Electronic/Pop", R.drawable.chvrches_bones));
+
+        //Create new adapter with songs ArrayList
+        SongAdapter adapter = new SongAdapter(this, songs);
+
+        //Check for category and specific item to filter
+        //Create adapter for genres or artists as necessary
+        final ArrayList<Song> genreSongs = new ArrayList<>();
+        final ArrayList<Song> artistSongs = new ArrayList<>();
+        if (category != null && specific != null) {
+            int size = songs.size();
+            if (category.equals("genre")) {
+                for (int i = 0; i < size; i++) {
+                    if (songs.get(i).getGenre().equals(specific)) {
+                        genreSongs.add(songs.get(i));
+                    }
+                }
+                adapter = new SongAdapter(this, genreSongs);
+            } else if (category.equals("artist")) {
+                for (int i = 0; i < size; i++) {
+                    if (songs.get(i).getArtist().equals(specific)) {
+                        artistSongs.add(songs.get(i));
+                    }
+                }
+                adapter = new SongAdapter(this, artistSongs);
+            }
+        }
+
+        //Get ListView and set adapter to display songs
+        GridView listView = findViewById(R.id.list);
+        listView.setAdapter(adapter);
+
+        //Set click listener according to category if necessary
+        //Set intent and pass ing artist, title, and album art selected
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (category == null) {
+                    Song nowPlaying = songs.get(position);
+                    Intent intent = new Intent(MainActivity.this, ShuffleActivity.class);
+                    intent.putExtra("ARTIST", nowPlaying.getArtist());
+                    intent.putExtra("TITLE", nowPlaying.getTitle());
+                    int resID = nowPlaying.getAlbumArt();
+                    intent.putExtra("ID", Integer.toString(resID));
+                    startActivity(intent);
+                } else if (category.equals("artist")) {
+                    Song nowPlaying = artistSongs.get(position);
+                    Intent intent = new Intent(MainActivity.this, ShuffleActivity.class);
+                    intent.putExtra("ARTIST", nowPlaying.getArtist());
+                    intent.putExtra("TITLE", nowPlaying.getTitle());
+                    int resID = nowPlaying.getAlbumArt();
+                    intent.putExtra("ID", Integer.toString(resID));
+                    startActivity(intent);
+                } else if (category.equals("genre")) {
+                    Song nowPlaying = genreSongs.get(position);
+                    Intent intent = new Intent(MainActivity.this, ShuffleActivity.class);
+                    intent.putExtra("ARTIST", nowPlaying.getArtist());
+                    intent.putExtra("TITLE", nowPlaying.getTitle());
+                    int resID = nowPlaying.getAlbumArt();
+                    intent.putExtra("ID", Integer.toString(resID));
+                    startActivity(intent);
+                }
             }
         });
 

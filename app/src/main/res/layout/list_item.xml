@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/list_item_layout"
         style="@style/CategoryStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
@@ -15,12 +15,6 @@
             style="@style/TextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <TextView
-            style="@style/TextView"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/arrows" />
     </RelativeLayout>
 
 </LinearLayout>
